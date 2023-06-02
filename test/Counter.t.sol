@@ -21,4 +21,11 @@ contract CounterTest is Test {
         counter.setNumber(x);
         assertEq(counter.number(), x);
     }
+
+    function testNonceIncrement() public {
+        uint256 currentNonce = vm.getNonce(address(this));
+        new Counter();
+        uint256 newNonce = vm.getNonce(address(this));
+        assertEq(currentNonce + 1, newNonce);
+    }
 }
