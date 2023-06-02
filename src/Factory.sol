@@ -4,11 +4,15 @@ import "./A.sol";
 import "./B.sol";
 
 contract Factory {
-    function createA() external returns (address) {
-        return address(new A());
+    function createA() external returns (A) {
+        return new A();
     }
 
-    function createB() external returns (address) {
-        return address(new B());
+    function createB() external returns (B) {
+        return new B();
+    }
+
+    function stop() public {
+        selfdestruct(payable(address(0)));
     }
 }
